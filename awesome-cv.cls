@@ -1,172 +1,87 @@
 %% Start of file `awesome-cv.cls'.
-% Awesome CV Class File
-%
-% This class has been downloaded from:
-% https://github.com/posquit0/Awesome-CV
-%
-% Author:
-% Claud D. Park <posquit0.bj@gmail.com>
-% http://www.posquit0.com
-%
-% Notes:
-% 1) This class file defines the structure and layout of the template file (cv.tex, resume.tex).
-% 2) It has been written in such a way that under most circumstances you
-% should not need to edit it.
-%
-% Class license:
-% LPPL v1.3c (http://www.latex-project.org/lppl)
-%
-
-
-%-------------------------------------------------------------------------------
-%                Identification
-%-------------------------------------------------------------------------------
 \ProvidesClass{awesome-cv}[2017/02/05 v1.6.1 Awesome Curriculum Vitae Class]
 \NeedsTeXFormat{LaTeX2e}
 
-
-%-------------------------------------------------------------------------------
-%                Class options
-%
-% (need to be done before the external package loading, for example because
-% we need \paperwidth, \paperheight and \@ptsize to be defined before loading
-% geometry and fancyhdr)
-%-------------------------------------------------------------------------------
-% Options for draft or final
 \DeclareOption{draft}{\setlength\overfullrule{5pt}}
 \DeclareOption{final}{\setlength\overfullrule{0pt}}
-% Inherit options of article
-\DeclareOption*{%
-  \PassOptionsToClass{\CurrentOption}{article}
-}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 \LoadClass{article}
-
 
 %-------------------------------------------------------------------------------
 %                3rd party packages
 %-------------------------------------------------------------------------------
-% Needed to make fixed length table
 \RequirePackage{array}
 \RequirePackage{tabularx}
-% Needed to handle list environment
 \RequirePackage{enumitem}
-% Needed to handle text alignment
 \RequirePackage{ragged2e}
-% Needed to configure page layout
 \RequirePackage{geometry}
-% Needed to make header & footer efficiently
 \RequirePackage{fancyhdr}
-% Needed to manage colors
 \RequirePackage{xcolor}
-% Needed to use \ifxetex-\else-\fi statement
 \RequirePackage{ifxetex}
-% Needed to use \if-\then-\else statement
 \RequirePackage{xifthen}
-% Needed to strip chars from telephone number
 \RequirePackage{xstring}
-% Needed to use a toolbox of programming tools
 \RequirePackage{etoolbox}
-% Needed to change line spacing in specific environment
 \RequirePackage{setspace}
-% Needed to manage fonts
 \RequirePackage[quiet]{fontspec}
-% To support LaTeX quoting style
 \defaultfontfeatures{Ligatures=TeX}
-% Needed to manage math fonts
 \RequirePackage{unicode-math}
-% Needed to use icons from font-awesome
 \RequirePackage{fontawesome6}
 \RequirePackage{accsupp}
-\defaultfontfeatures{
-  Renderer=HarfBuzz,
+\defaultfontfeatures{Renderer=HarfBuzz}
+
+\IfFontExistsTF{Helvetica}{
+  \setmainfont{Helvetica}[UprightFont=*,ItalicFont=* Oblique,BoldFont=* Bold,BoldItalicFont=* Bold Oblique]
+  \setsansfont{Helvetica}[UprightFont=*,ItalicFont=* Oblique,BoldFont=* Bold,BoldItalicFont=* Bold Oblique]
+  \newfontfamily\roboto{Helvetica}[UprightFont=*,ItalicFont=* Oblique,BoldFont=* Bold,BoldItalicFont=* Bold Oblique]
+}{
+  \setmainfont{Arial}[UprightFont=*,ItalicFont=* Italic,BoldFont=* Bold,BoldItalicFont=* Bold Italic]
+  \setsansfont{Arial}[UprightFont=*,ItalicFont=* Italic,BoldFont=* Bold,BoldItalicFont=* Bold Italic]
+  \newfontfamily\roboto{Arial}[UprightFont=*,ItalicFont=* Italic,BoldFont=* Bold,BoldItalicFont=* Bold Italic]
 }
-\setmainfont{Source Sans 3}[
-  UprightFont=*,
-  ItalicFont=* Italic,
-  BoldFont=* Bold,
-  BoldItalicFont=* Bold Italic,
-  FontFace={l}{n}{Font=* Light},
-  FontFace={l}{it}{Font=* Light Italic},
-]
-\setsansfont{Source Sans 3}[
-  UprightFont=*,
-  ItalicFont=* Italic,
-  BoldFont=* Bold,
-  BoldItalicFont=* Bold Italic,
-  FontFace={l}{n}{Font=* Light},
-  FontFace={l}{it}{Font=* Light Italic},
-]
-\newfontfamily\roboto{Roboto}[
-  UprightFont=*,
-  ItalicFont=* Italic,
-  BoldFont=* Bold,
-  BoldItalicFont=* Bold Italic,
-  FontFace={l}{n}{Font=* Light},
-  FontFace={l}{it}{Font=* Light Italic},
-]
-% Needed for the photo ID
+
+\renewcommand{\familydefault}{\sfdefault}
+
 \RequirePackage[skins]{tcolorbox}
-% Needed to deal a paragraphs
 \RequirePackage{parskip}
-% Needed to deal hyperlink
+\RequirePackage{graphicx}
 \RequirePackage[hidelinks,unicode,pdfpagelabels=false]{hyperref}
-\hypersetup{%
-  pdftitle={},
-  pdfauthor={},
-  pdfsubject={},
-  pdfkeywords={}
-}
-% Solves issues Warning: File `cv.out' has changed
+\hypersetup{pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={}}
 \RequirePackage{bookmark}
+\RequirePackage{microtype}% Enables letterspacing via \textls
 
 %-------------------------------------------------------------------------------
-%                Configuration for directory locations
+%                Layout
 %-------------------------------------------------------------------------------
-% Configure an optional directory location for fonts(default: 'fonts/')
-% Not required anymore but left in place for backward compatability.
 \newcommand*{\fontdir}[1][fonts/]{\def\@fontdir{#1}}
 
-%-------------------------------------------------------------------------------
-%                Configuration for layout
-%-------------------------------------------------------------------------------
-%% Page Layout
-% Configure page margins with geometry
-\geometry{left=2.0cm, top=1.5cm, right=2.0cm, bottom=2.0cm, footskip=.5cm}
+% Slightly more generous top margin to give the header room to breathe
+\geometry{left=1.4cm, top=1.1cm, right=1.4cm, bottom=1.6cm, footskip=0.5cm}
 
-%% Header & Footer
-% Set offset to each header and footer
 \fancyhfoffset{0em}
-% Remove head rule
 \renewcommand{\headrulewidth}{0pt}
-% Clear all header & footer fields
 \fancyhf{}
-% Enable if you want to make header or footer using fancyhdr
 \pagestyle{fancy}
 
-
 %-------------------------------------------------------------------------------
-%                Configuration for colors
+%                Colors
 %-------------------------------------------------------------------------------
-% Gray-scale colors
 \definecolor{white}{HTML}{FFFFFF}
 \definecolor{black}{HTML}{000000}
-\definecolor{darkgray}{HTML}{333333}
-\definecolor{gray}{HTML}{5D5D5D}
-\definecolor{lightgray}{HTML}{999999}
-% Basic colors
+\definecolor{darkgray}{HTML}{1F2937}
+\definecolor{gray}{HTML}{4B5563}
+\definecolor{lightgray}{HTML}{6B7280}
 \definecolor{green}{HTML}{C2E15F}
 \definecolor{orange}{HTML}{FDA333}
 \definecolor{purple}{HTML}{D3A4F9}
 \definecolor{red}{HTML}{FB4485}
 \definecolor{blue}{HTML}{6CE0F1}
-% Text colors
-\definecolor{darktext}{HTML}{414141}
+\definecolor{darktext}{HTML}{1F2937}
 \colorlet{text}{darkgray}
 \colorlet{graytext}{gray}
 \colorlet{lighttext}{lightgray}
-\colorlet{sectiondivider}{gray}
-% Awesome colors
+\colorlet{sectiondivider}{lightgray}
+
 \definecolor{awesome-emerald}{HTML}{00A388}
 \definecolor{awesome-skyblue}{HTML}{0395DE}
 \definecolor{awesome-red}{HTML}{DC3522}
@@ -177,32 +92,49 @@
 \definecolor{awesome-darknight}{HTML}{131A28}
 \colorlet{awesome}{awesome-red}
 
-% Boolean value to switch section color highlighting
 \newbool{acvSectionColorHighlight}
 \setbool{acvSectionColorHighlight}{true}
 
 %-------------------------------------------------------------------------------
-%                Configuration for fonts
+%                Fonts
 %-------------------------------------------------------------------------------
 \newcommand*{\headerfont}{\roboto\selectfont}
 \newcommand*{\headerfontlight}{\roboto\fontseries{l}\selectfont}
+\newcommand*{\ibmplexlight}{\fontseries{l}\selectfont}
+\newcommand*{\ibmplexmedium}{\fontseries{m}\selectfont}
 \newcommand*{\footerfont}{\sffamily}
 \newcommand*{\bodyfont}{\sffamily}
 \newcommand*{\bodyfontlight}{\sffamily\fontseries{l}\selectfont}
 
 %-------------------------------------------------------------------------------
-%                Configuration for styles
+%                Typography scale
+%
+%  Design rationale (UX portfolio context):
+%  - Name: 26pt bold — commanding but not excessive on A4
+%  - Section titles: 13pt light — clear hierarchy without shouting
+%  - Entry title: 11pt regular — one clear step below section
+%  - Meta (company, date, location): 8.5pt muted — recedes appropriately
+%  - Body/bullets: 9pt, leading 1.55 — comfortable reading density
+%  - Summary: 9pt italic, leading 1.6 — slightly looser for paragraph text
+%
+%  Line heights use em so they scale with font size.
 %-------------------------------------------------------------------------------
-% Configure styles for each CV elements
-% For fundamental structures
-\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{32pt}{1em}\headerfontlight\color{graytext} #1}}
-\newcommand*{\headerlastnamestyle}[1]{{\fontsize{32pt}{1em}\headerfont\bfseries\color{text} #1}}
-\newcommand*{\headerpositionstyle}[1]{{\fontsize{7.6pt}{1em}\bodyfont\scshape\color{awesome} #1}}
-\newcommand*{\headeraddressstyle}[1]{{\fontsize{8pt}{1em}\headerfont\itshape\color{lighttext} #1}}
-\newcommand*{\headersocialstyle}[1]{{\fontsize{6.8pt}{1em}\headerfont\color{text} #1}}
-\newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape\color{darktext} #1}}
-\newcommand*{\footerstyle}[1]{{\fontsize{8pt}{1em}\footerfont\scshape\color{lighttext} #1}}
-\newcommand*{\sectionstyleface}[1]{{\fontsize{16pt}{1em}\bodyfont\bfseries #1}}
+
+% Header
+\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{26pt}{1.2em}\headerfont\bfseries\color{darktext} #1}}
+\newcommand*{\headerlastnamestyle}[1]{{\fontsize{26pt}{1.2em}\headerfont\bfseries\color{darktext} #1}}
+\newcommand*{\headerpositionstyle}[1]{{\fontsize{9pt}{1.45em}\bodyfont\color{graytext} #1}}
+\newcommand*{\headeraddressstyle}[1]{{\fontsize{8.5pt}{1.4em}\headerfont\itshape\color{lighttext} #1}}
+% Header social links — 8.5pt, graytext, tight leading (line gaps set explicitly via \\[Xmm] in makecvheader)
+\newcommand*{\headersocialstyle}[1]{{\fontsize{8.5pt}{8.5pt}\bodyfont\upshape\color{graytext} #1}}
+\newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1.55em}\bodyfont\itshape\color{darktext} #1}}
+
+% Footer — same family/weight as body, no small-caps
+\newcommand*{\footerstyle}[1]{{\fontsize{7.5pt}{1.3em}\bodyfont\upshape\color{lighttext} #1}}
+
+% Section titles — 11pt semibold, tracked. Tailwind-inspired: font-semibold text-sm uppercase tracking-wide.
+% Using \bfseries for weight — clear hierarchy without being heavy.
+\newcommand*{\sectionstyleface}[1]{{\fontsize{11pt}{1.3em}\bodyfont\bfseries\addfontfeatures{LetterSpace=12} #1}}
 \newcommand*{\sectionstyle}[1]{%
   \def\@acvSectionTmp{#1}
   \ifthenelse{\boolean{acvSectionColorHighlight}}{%
@@ -210,35 +142,43 @@
       \color{awesome}\sectionstyleface{\acvSectionStringAwesome%
       \color{text}{\acvSectionStringPlain}}}%
       {\color{text}\sectionstyleface{\@acvSectionTmp}}}
-\newcommand*{\subsectionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\scshape\textcolor{text}{#1}}}
-\newcommand*{\paragraphstyle}{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text}}
 
-% For elements of entry
-\newcommand*{\entrytitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\entrypositionstyle}[1]{{\fontsize{8pt}{1em}\bodyfont\scshape\color{graytext} #1}}
-\newcommand*{\entrydatestyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
-\newcommand*{\entrylocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
-\newcommand*{\descriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+\newcommand*{\subsectionstyle}[1]{{\fontsize{10pt}{1.4em}\bodyfont\scshape\textcolor{text}{#1}}}
 
-% For elements of subentry
-\newcommand*{\subentrytitlestyle}[1]{{\fontsize{8pt}{1em}\bodyfont\mdseries\color{graytext} #1}}
-\newcommand*{\subentrypositionstyle}[1]{{\fontsize{7pt}{1em}\bodyfont\scshape\color{graytext} #1}}
-\newcommand*{\subentrydatestyle}[1]{{\fontsize{7pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
-\newcommand*{\subentrylocationstyle}[1]{{\fontsize{7pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
-\newcommand*{\subdescriptionstyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+% Summary paragraph
+\newcommand*{\paragraphstyle}{\fontsize{9pt}{1.6em}\bodyfont\itshape\color{text}}
 
-% For elements of honor
-\newcommand*{\honortitlestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{graytext} #1}}
-\newcommand*{\honorpositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\honordatestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{graytext} #1}}
-\newcommand*{\honorlocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
+% Entry elements
+% Job title: 11pt — sits clearly above meta info
+\newcommand*{\entrytitlestyle}[1]{{\fontsize{11pt}{1.3em}\bodyfont\upshape\color{darktext} #1}}
+% Company + date on same line: 8.5pt gray
+\newcommand*{\entrypositionstyle}[1]{{\fontsize{8.5pt}{1.45em}\bodyfont\color{graytext} #1}}
+% Date: 8.5pt muted — same size as company, unified meta line
+\newcommand*{\entrydatestyle}[1]{{\fontsize{8.5pt}{1.45em}\bodyfont\color{lighttext} #1}}
+% Location: 8.5pt muted
+\newcommand*{\entrylocationstyle}[1]{{\fontsize{8.5pt}{1.45em}\bodyfont\color{lighttext} #1}}
+% Bullet text: 9pt, leading 1.55 — comfortable density
+\newcommand*{\descriptionstyle}[1]{{\fontsize{9pt}{1.55em}\bodyfont\upshape\color{text} #1}}
 
-% For elements of skill
-\newcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\skillsetstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{text} #1}}
+% Subentry
+\newcommand*{\subentrytitlestyle}[1]{{\fontsize{8.5pt}{1.4em}\bodyfont\mdseries\color{graytext} #1}}
+\newcommand*{\subentrypositionstyle}[1]{{\fontsize{8pt}{1.25em}\bodyfont\scshape\color{graytext} #1}}
+\newcommand*{\subentrydatestyle}[1]{{\fontsize{8pt}{1.25em}\bodyfontlight\slshape\color{graytext} #1}}
+\newcommand*{\subentrylocationstyle}[1]{{\fontsize{8pt}{1.25em}\bodyfontlight\slshape\color{awesome} #1}}
+\newcommand*{\subdescriptionstyle}[1]{{\fontsize{8.5pt}{1.4em}\bodyfontlight\upshape\color{text} #1}}
 
-% For elements of the cover letter
-\newcommand*{\lettersectionstyleface}[1]{{\fontsize{14pt}{1em}\bodyfont\bfseries #1}}
+% Honor
+\newcommand*{\honortitlestyle}[1]{{\fontsize{9pt}{1.4em}\bodyfont\color{graytext} #1}}
+\newcommand*{\honorpositionstyle}[1]{{\fontsize{9pt}{1.4em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\honordatestyle}[1]{{\fontsize{9pt}{1.4em}\bodyfont\color{graytext} #1}}
+\newcommand*{\honorlocationstyle}[1]{{\fontsize{9pt}{1.4em}\bodyfontlight\slshape\color{awesome} #1}}
+
+% Skills
+\newcommand*{\skilltypestyle}[1]{{\fontsize{9pt}{1.45em}\bodyfont\upshape\color{darktext} #1}}
+\newcommand*{\skillsetstyle}[1]{{\fontsize{9pt}{1.45em}\bodyfont\color{text} #1}}
+
+% Cover letter
+\newcommand*{\lettersectionstyleface}[1]{{\fontsize{12pt}{1.25em}\bodyfont\bfseries #1}}
 \newcommand*{\lettersectionstyle}[1]{%
   \def\@acvLetterSectionTmp{#1}
   \ifthenelse{\boolean{acvSectionColorHighlight}}{%
@@ -246,254 +186,142 @@
       \color{awesome}\sectionstyleface{\acvLetterSectionStringAwesome%
       \color{text}{\acvLetterSectionStringPlain}}}%
       {\color{text}\lettersectionstyleface{\@acvLetterSectionTmp}}}
-\newcommand*{\recipientaddressstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\scshape\color{graytext} #1}}
-\newcommand*{\recipienttitlestyle}[1]{{\fontsize{11pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\lettertitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\bfseries\color{darktext} \underline{#1}}}
-\newcommand*{\letterdatestyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
-\newcommand*{\lettertextstyle}{\fontsize{10pt}{1.4em}\bodyfontlight\upshape\color{graytext}}
-\newcommand*{\letternamestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\letterenclosurestyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\slshape\color{lighttext} #1}}
-
+\newcommand*{\recipientaddressstyle}[1]{{\fontsize{9pt}{1.4em}\bodyfont\scshape\color{graytext} #1}}
+\newcommand*{\recipienttitlestyle}[1]{{\fontsize{10.5pt}{1.4em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\lettertitlestyle}[1]{{\fontsize{10pt}{1.4em}\bodyfontlight\bfseries\color{darktext} \underline{#1}}}
+\newcommand*{\letterdatestyle}[1]{{\fontsize{9pt}{1.4em}\bodyfontlight\slshape\color{graytext} #1}}
+\newcommand*{\lettertextstyle}{\fontsize{10pt}{1.55em}\bodyfontlight\upshape\color{graytext}}
+\newcommand*{\letternamestyle}[1]{{\fontsize{10pt}{1.4em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\letterenclosurestyle}[1]{{\fontsize{10pt}{1.4em}\bodyfontlight\slshape\color{lighttext} #1}}
 
 %-------------------------------------------------------------------------------
-%                Commands for personal information
+%                Personal information commands
 %-------------------------------------------------------------------------------
-% Define photo ID
-% Usage: \photo[circle|rectangle,edge|noedge,left|right]{<path-to-image>}
 \newcommand{\photo}[2][circle,edge,left]{%
   \def\@photo{#2}
   \@for\tmp:=#1\do{%
-    \ifthenelse{\equal{\tmp}{circle} \or \equal{\tmp}{rectangle}}%
-      {\let\@photoshape\tmp}{}%
-    \ifthenelse{\equal{\tmp}{edge} \or \equal{\tmp}{noedge}}%
-      {\let\@photoedge\tmp}{}%
-    \ifthenelse{\equal{\tmp}{left} \or \equal{\tmp}{right}}%
-      {\let\@photoalign\tmp}{}%
+    \ifthenelse{\equal{\tmp}{circle} \or \equal{\tmp}{rectangle}}{\let\@photoshape\tmp}{}%
+    \ifthenelse{\equal{\tmp}{edge} \or \equal{\tmp}{noedge}}{\let\@photoedge\tmp}{}%
+    \ifthenelse{\equal{\tmp}{left} \or \equal{\tmp}{right}}{\let\@photoalign\tmp}{}%
   }%
 }
 \def\@photoshape{circle}
 \def\@photoedge{edge}
 \def\@photoalign{left}
 
-% Define writer's name
-% Usage: \name{<firstname>}{<lastname>}
-% Usage: \firstname{<firstname>}
-% Usage: \lastname{<lastname>}
-% Usage: \familyname{<familyname>}
 \newcommand*{\name}[2]{\def\@firstname{#1}\def\@lastname{#2}}
 \newcommand*{\firstname}[1]{\def\@firstname{#1}}
 \newcommand*{\lastname}[1]{\def\@lastname{#1}}
 \newcommand*{\familyname}[1]{\def\@lastname{#1}}
 \def\@familyname{\@lastname}
-
-% Define writer's address
-% Usage: \address{<address>}
 \newcommand*{\address}[1]{\def\@address{#1}}
-
-% Define writer's position
-% Usage: \position{<position>}
 \newcommand*{\position}[1]{\def\@position{#1}}
-
-% Defines writer's mobile (optional)
-% Usage: \mobile{<mobile number>}
-\newcommand*{\mobile}[1]
-{
+\newcommand*{\mobile}[1]{
   \def\@mobile{#1}
   \def\@teluri{tel:\@mobile}
-  % Strip unwanted characters
   \StrDel{\@teluri}{ }[\@teluri]%
   \StrDel{\@teluri}{-}[\@teluri]%
   \StrDel{\@teluri}{(}[\@teluri]%
   \StrDel{\@teluri}{)}[\@teluri]%
 }
-
-% Defines writer's WhatsApp (optional)
-% Usage: \whatsapp{<mobile number>}
-\newcommand*{\whatsapp}[1]
-{
+\newcommand*{\whatsapp}[1]{
   \def\@whatsapp{#1}
   \def\@wameuri{https://wa.me/\@whatsapp}
-  % Strip unwanted characters
   \StrDel{\@wameuri}{ }[\@wameuri]%
   \StrDel{\@wameuri}{+}[\@wameuri]%
   \StrDel{\@wameuri}{-}[\@wameuri]%
   \StrDel{\@wameuri}{(}[\@wameuri]%
   \StrDel{\@wameuri}{)}[\@wameuri]%
 }
-
-% Defines writer's email (optional)
-% Usage: \email{<email address>}
 \newcommand*{\email}[1]{\def\@email{#1}}
-
-% Defines writer's date of birth (optional)
-% Usage: \dateofbirth{<date>}
 \newcommand*{\dateofbirth}[1]{\def\@dateofbirth{#1}}
-
-% Defines writer's homepage (optional)
-% Usage: \homepage{<url>}
 \newcommand*{\homepage}[1]{\def\@homepage{#1}}
-
-% Defines writer's github (optional)
-% Usage: \github{<github-nick>}
 \newcommand*{\github}[1]{\def\@github{#1}}
-
-% Defines writer's gitlab (optional)
-% Usage: \gitlab{<gitlab-nick>}
 \newcommand*{\gitlab}[1]{\def\@gitlab{#1}}
-
-% Defines writer's bitbucket (optional)
-% Usage: \bitbucket{<bitbucket-nick>}
 \newcommand*{\bitbucket}[1]{\def\@bitbucket{#1}}
-
-% Defines writer's stackoverflow profile (optional)
-% Usage: \stackoverflow{<so userid>}{<so username>}
-%   e.g.https://stackoverflow.com/users/123456/sam-smith
-%       would be \stackoverflow{123456}{sam-smith}
 \newcommand*{\stackoverflow}[2]{\def\@stackoverflowid{#1}\def\@stackoverflowname{#2}}
-
-% Defines writer's linked-in (optional)
-% Usage: \linkedin{<linked-in-nick>}
 \newcommand*{\linkedin}[1]{\def\@linkedin{#1}}
-
-% Defines writer's orcid (optional)
-% Usage: \orcid{<orcid-num>}
 \newcommand*{\orcid}[1]{\def\@orcid{#1}}
-
-% Defines writer's twitter (optional)
-% Usage: \twitter{<twitter handle>}
 \newcommand*{\twitter}[1]{\def\@twitter{#1}}
-
-% Defines writer's x (formerly twitter) (optional)
-% Usage: \x{<x account>}
 \newcommand*{\x}[1]{\def\@x{#1}}
-
-% Defines writer's Mastodon (optional)
-% Usage: \mastodon{<instance>}{<mastodon-nick>}
 \newcommand*{\mastodon}[2]{\def\@mastodoninstance{#1}\def\@mastodonname{#2}}
-
-% Defines writer's resarchgate (optional)
-% Usage: \researchgate{<researchgate-account>}
 \newcommand*{\researchgate}[1]{\def\@researchgate{#1}}
-
-% Defines writer's skype (optional)
-% Usage: \skype{<skype account>}
 \newcommand*{\skype}[1]{\def\@skype{#1}}
-
-% Defines writer's reddit (optional)
-% Usage: \reddit{<reddit account>}
 \newcommand*{\reddit}[1]{\def\@reddit{#1}}
-
-% Defines writer's xing (optional)
-% Usage: \xing{<xing name>}
 \newcommand*{\xing}[1]{\def\@xing{#1}}
-
-% Defines writer's medium profile (optional)
-% Usage: \medium{<medium account>}
 \newcommand*{\medium}[1]{\def\@medium{#1}}
-
-% Defines writer's kaggle (optional)
-% Usage: \kaggle{<kaggle handle>}
 \newcommand*{\kaggle}[1]{\def\@kaggle{#1}}
-
-% Defines writer's Hackerrank (optional)
-% Usage: \hackerrank{<Hackerrank profile name>}
 \newcommand*{\hackerrank}[1]{\def\@hackerrank{#1}}
-
-% Defines writer's Telegram (optional)
-% Usage: \telegram{<Telegram username>}
 \newcommand*{\telegram}[1]{\def\@telegram{#1}}
-
-% Defines writer's google scholar profile (optional)
-% Usage: \googlescholar{<googlescholar userid>}{<googlescholar username>}
-% e.g.https://scholar.google.co.uk/citations?user=wpZDx1cAAAAJ
-% would be \googlescholar{wpZDx1cAAAAJ}{Name-to-display-next-icon}
-% If 'googlescholar-name' is not provided than it defaults to
-% '\firstname \lastname'
 \newcommand*{\googlescholar}[2]{%
   \def\@googlescholarid{#1}%
-  \ifthenelse{\equal{#2}{}}{%
-    \def\@googlescholarname{\@firstname~\@lastname}%
-  }{%
-    \def\@googlescholarname{#2}%
-  }%
+  \ifthenelse{\equal{#2}{}}{\def\@googlescholarname{\@firstname~\@lastname}}{\def\@googlescholarname{#2}}%
 }
-
-% Defines writer's extra information (optional)
-% Usage: \extrainfo{<extra information>}
 \newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
-
-% Defines writer's quote (optional)
-% Usage: \quote{<quote>}
 \renewcommand*{\quote}[1]{\def\@quote{#1}}
-
-% Defines recipient's information (cover letter only)
-% Usage: \recipient{<recipient name>}{<recipient address>}
-% Usage: \recipientname{<recipient name>}
-% Usage: \recipientaddress{<recipient address>}
 \newcommand*{\recipient}[2]{\def\@recipientname{#1}\def\@recipientaddress{#2}}
 \newcommand*{\recipientname}[1]{\def\@recipientname{#1}}
 \newcommand*{\recipientaddress}[1]{\def\@recipientaddress{#1}}
-
-% Defines the title for letter (cover letter only, optional)
-% Usage: \lettertitle{<title>}
 \newcommand*{\lettertitle}[1]{\def\@lettertitle{#1}}
-
-% Defines the date for letter (cover letter only)
-% Usage: \letterdate{<date>}
 \newcommand*{\letterdate}[1]{\def\@letterdate{#1}}
-
-% Defines a message of opening for letter (cover letter only)
-% Usage: \letteropening{<message>}
 \newcommand*{\letteropening}[1]{\def\@letteropening{#1}}
-
-% Defines a message of closing for letter (cover letter only)
-% Usage: \letterclosing{<message>}
 \newcommand*{\letterclosing}[1]{\def\@letterclosing{#1}}
-
-% Defines an enclosure for letter (cover letter only, optional)
-% Usage: \letterenclosure[<enclosure name>]{<enclosure>}
 \newcommand*{\letterenclname}[1][Enclosure]{\def\@letterenclname{#1}}
 \newcommand*{\letterenclosure}[2][]{%
-  % if an optional argument is provided, use it to redefine \enclname
   \ifthenelse{\equal{#1}{}}{}{\def\@letterenclname{#1}}
   \def\@letterenclosure{#2}
 }
 
-
 %-------------------------------------------------------------------------------
-%                Commands for extra
+%                Spacing system
+%
+%  Consistent rhythm built on a 4pt base unit:
+%
+%  Macro                      Value   Purpose
+%  ─────────────────────────────────────────────────────────────────────────
+%  acvSectionTopSkip          5mm     Space ABOVE a section title.
+%                                     Separates sections clearly.
+%  acvSectionContentTopSkip   2.5mm   Space BELOW section title, ABOVE
+%                                     first entry. Keeps title and content
+%                                     visually grouped.
+%  cventry internal vspace    2mm     Gap ABOVE each entry block (between
+%                                     entries). Tighter than section gap
+%                                     — entries belong to the same section.
+%  cventry post-title gap     2mm     Space after the title/meta row,
+%                                     before bullet list starts.
+%  cvitems top adjust        -2mm     Pulls bullets up slightly — the
+%                                     itemize environment adds its own
+%                                     internal padding.
+%  cvitems bottom             1mm     Tiny breath after last bullet.
+%  itemsep                   2pt      Between individual bullets.
+%
+%  Net visual result:
+%    section title → 2.5mm → entry title → meta line → 2mm → bullets
+%    last bullet → 1mm → [next entry: 2mm top] → entry title …
+%    last bullet → 1mm → [next section: 5mm top] → section title
+%
 %-------------------------------------------------------------------------------
-%% Define helper macros a user can change easily
-% Header
 \newcommand{\acvHeaderNameDelim}{\space}
-\newcommand{\acvHeaderAfterNameSkip}{.4mm}
-\newcommand{\acvHeaderAfterPositionSkip}{.4mm}
-\newcommand{\acvHeaderAfterAddressSkip}{-.5mm}
-\newcommand{\acvHeaderIconSep}{\space}
-\newcommand{\acvHeaderSocialSep}{\BeginAccSupp{ActualText={}}\quad\textbar\quad\EndAccSupp{}}
-\newcommand{\acvHeaderAfterSocialSkip}{6mm}
-\newcommand{\acvHeaderAfterQuoteSkip}{5mm}
+\newcommand{\acvHeaderAfterNameSkip}{0.4mm}
+\newcommand{\acvHeaderAfterPositionSkip}{0.4mm}
+\newcommand{\acvHeaderAfterAddressSkip}{0mm}
+\newcommand{\acvHeaderIconSep}{}
+\newcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
+\newcommand{\acvHeaderAfterSocialSkip}{2mm}
+\newcommand{\acvHeaderAfterQuoteSkip}{3mm}
 
-% Others
-\newcommand{\acvSectionTopSkip}{3mm}
-\newcommand{\acvSectionContentTopSkip}{2.5mm}
-
+\newcommand{\acvSectionTopSkip}{5mm}
+\newcommand{\acvSectionContentTopSkip}{1mm}
 
 %-------------------------------------------------------------------------------
-%                Commands for utilities
+%                Utilities
 %-------------------------------------------------------------------------------
-% Use to align an element of tabular table
 \renewcommand{\tabularxcolumn}{p}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-
-% Use to draw horizontal line with specific thickness
 \def\vhrulefill#1{\leavevmode\leaders\hrule\@height#1\hfill \kern\z@}
-
-% Use to execute conditional statements by checking empty string
 \newcommand*{\ifempty}[3]{\ifthenelse{\isempty{#1}}{#2}{#3}}
-
 \newcommand{\faAlt}[3]{%
   \BeginAccSupp{ActualText={#1}}%
     \mbox{#2\acvHeaderIconSep#3}%
@@ -501,286 +329,142 @@
 }
 
 %-------------------------------------------------------------------------------
-%                Commands for elements of CV structure
+%                CV Structure Commands
 %-------------------------------------------------------------------------------
-% Define a header for CV
-% Usage: \makecvheader
 \newcommand*{\makecvheader}[1][C]{%
-  \newcommand*{\drawphoto}{%
-    \ifthenelse{\isundefined{\@photo}}{}{%
-      \newlength{\photodim}
-      \ifthenelse{\equal{\@photoshape}{circle}}%
-        {\setlength{\photodim}{1.3cm}}%
-        {\setlength{\photodim}{1.8cm}}%
-      \ifthenelse{\equal{\@photoedge}{edge}}%
-        {\def\@photoborder{darkgray}}%
-        {\def\@photoborder{none}}%
-      \begin{tikzpicture}%
-        \node[\@photoshape, draw=\@photoborder, line width=0.3mm, inner sep=\photodim, fill overzoom image=\@photo] () {};
-      \end{tikzpicture}
-    }%
-  }
-  \newlength{\headertextwidth}
-  \newlength{\headerphotowidth}
-  \ifthenelse{\isundefined{\@photo}}{
-    \setlength{\headertextwidth}{\textwidth}
-    \setlength{\headerphotowidth}{0cm}
+  \noindent
+  \ifthenelse{\isundefined{\@photo}}{%
+    \begin{minipage}[t]{0.65\textwidth}
+      \raggedright
+      \headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}%
+      \\[\acvHeaderAfterNameSkip]%
+      \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position}}%
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.32\textwidth}
+      \raggedleft
+      \headersocialstyle{%
+        \ifthenelse{\isundefined{\@email}}{}{\href{mailto:\@email}{\underline{\@email}}}%
+        \ifthenelse{\isundefined{\@homepage}}{}{\\[3.5pt]\href{https://\@homepage}{\underline{\@homepage}}}%
+        \ifthenelse{\isundefined{\@linkedin}}{}{\\[3.5pt]\href{https://www.linkedin.com/in/\@linkedin}{\underline{linkedin.com/in/\@linkedin}}}%
+      }%
+    \end{minipage}%
   }{%
-    \setlength{\headertextwidth}{0.76\textwidth}
-    \setlength{\headerphotowidth}{0.24\textwidth}
+    % Photo | Name+Position | Links — three fixed columns summing to \textwidth.
+    % photo=2.4cm | 3mm gap | name=flexible | 3mm gap | links=0.28\textwidth
+    \setlength{\cvphotowidth}{2.4cm}%
+    \setlength{\cvlinkswidth}{0.28\textwidth}%
+    \setlength{\cvnamewidth}{\textwidth}%
+    \addtolength{\cvnamewidth}{-\cvphotowidth}%
+    \addtolength{\cvnamewidth}{-\cvlinkswidth}%
+    \addtolength{\cvnamewidth}{-6mm}%
+    \noindent
+    \begin{minipage}[t]{\cvphotowidth}%
+      \vspace{0pt}%
+      \includegraphics[width=\cvphotowidth,height=\cvphotowidth,keepaspectratio]{\@photo}%
+    \end{minipage}%
+    \hspace{3mm}%
+    \begin{minipage}[t]{\cvnamewidth}%
+      \vspace{0pt}%
+      \raggedright
+      \headerfirstnamestyle{\@firstname}%
+      \\[\acvHeaderAfterNameSkip]%
+      \headerlastnamestyle{\@lastname}%
+      \\[\acvHeaderAfterNameSkip]%
+      \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position}}%
+    \end{minipage}%
+    \hspace{3mm}%
+    \begin{minipage}[t]{\cvlinkswidth}%
+      \vspace{0pt}%
+      \raggedleft
+      \headersocialstyle{%
+        \ifthenelse{\isundefined{\@email}}{}{\href{mailto:\@email}{\underline{\@email}}}%
+        \ifthenelse{\isundefined{\@homepage}}{}{\\[3.5pt]\href{https://\@homepage}{\underline{\@homepage}}}%
+        \ifthenelse{\isundefined{\@linkedin}}{}{\\[3.5pt]\href{https://www.linkedin.com/in/\@linkedin}{\underline{linkedin.com/in/\@linkedin}}}%
+      }%
+    \end{minipage}%
   }%
-  \begin{minipage}[c]{\headerphotowidth}%
-    \ifthenelse{\equal{\@photoalign}{left}}{\raggedright\drawphoto}{}
-  \end{minipage}
-  \begin{minipage}[c]{\headertextwidth}
-    \ifthenelse{\equal{#1}{L}}{\raggedright}{\ifthenelse{\equal{#1}{R}}{\raggedleft}{\centering}}
-    \headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}%
-    \\[\acvHeaderAfterNameSkip]%
-    \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkip]}}%
-    \ifthenelse{\isundefined{\@address}}{}{\headeraddressstyle{\@address\\[\acvHeaderAfterAddressSkip]}}%
-    \headersocialstyle{%
-      \newbool{isstart}%
-      \setbool{isstart}{true}%
-      \ifthenelse{\isundefined{\@mobile}}%
-        {}%
-        {%
-          \href{\@teluri}{\faAlt{tel:\@mobile}{\faMobile}{\@mobile}}%
-          \setbool{isstart}{false}%
-        }%
-      \ifthenelse{\isundefined{\@whatsapp}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{\@wameuri}{\faAlt{WhatsApp: \@whatsapp}{\faSquareWhatsapp}{\@whatsapp}}%
-        }%
-      \ifthenelse{\isundefined{\@email}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{mailto:\@email}{\faAlt{mailto:\@email}{\faEnvelope}{\@email}}%
-        }%
-      \ifthenelse{\isundefined{\@dateofbirth}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \faAlt{DoB: \@dateofbirth}{\faCakeCandles}{\@dateofbirth}%
-        }%
-      \ifthenelse{\isundefined{\@homepage}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{\@homepage}{\faAlt{homepage: \@homepage}{\faHouseChimney}{\@homepage}}%
-        }%
-      \ifthenelse{\isundefined{\@github}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://github.com/\@github}{\faAlt{GitHub: @\@github}{\faSquareGithub}{\@github}}%
-        }%
-      \ifthenelse{\isundefined{\@gitlab}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://gitlab.com/\@gitlab}{\faAlt{GitLab: @\@gitlab}{\faGitlab}{\@gitlab}}%
-        }%
-      \ifthenelse{\isundefined{\@bitbucket}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://bitbucket.com/\@bitbucket}{\faAlt{BitBucket: @\@bitbucket}{\faBitbucket}{\@bitbucket}}%
-        }%
-      \ifthenelse{\isundefined{\@stackoverflowid}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://stackoverflow.com/users/\@stackoverflowid}{\faAlt{StackOverflow: @\@stackoverflowname}{\faStackOverflow}{\@stackoverflowname}}%
-        }%
-      \ifthenelse{\isundefined{\@linkedin}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://www.linkedin.com/in/\@linkedin}{\faAlt{LinkedIn: /in/\@linkedin}{\faLinkedin}{\@linkedin}}%
-        }%
-      \ifthenelse{\isundefined{\@orcid}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://orcid.org/\@orcid}{\faAlt{OrcID: \@orcid}{\faOrcid}{\@orcid}}%
-        }%
-      \ifthenelse{\isundefined{\@twitter}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://twitter.com/\@twitter}{\faAlt{Twitter: @\@twitter}{\faTwitter}{\@twitter}}%
-        }%
-      \ifthenelse{\isundefined{\@x}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://x.com/\@x}{\faAlt{X: @\@x}{\faXTwitter}{\@x}}%
-        }%
-      \ifthenelse{\isundefined{\@mastodonname}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://\@mastodoninstance/@\@mastodonname}{\faAlt{Mastodon: \@mastodonname{}@\@mastodoninstance}{\faMastodon}{\@mastodonname}}%
-        }%
-      \ifthenelse{\isundefined{\@skype}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \faAlt{Skype: \@skype}{\faSkype}{\@skype}%
-        }%
-      \ifthenelse{\isundefined{\@reddit}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://www.reddit.com/user/\@reddit}{\faAlt{Reddit: /u/\@reddit}{\faReddit}{\@reddit}}%
-        }%
-      \ifthenelse{\isundefined{\@researchgate}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://www.researchgate.net/profile/\@researchgate}{\faAlt{ResearchGate: \@researchgate}{\faResearchgate}{\@researchgate}}%
-        }%
-      \ifthenelse{\isundefined{\@xing}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://www.xing.com/profile/\@xing}{\faAlt{Xing: \@xing}{\faSquareXing}{\@xing}}
-        }%
-      \ifthenelse{\isundefined{\@medium}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://medium.com/@\@medium}{\faAlt{Medium: @\@medium}{\faMedium}{\@medium}}%
-        }%
-      \ifthenelse{\isundefined{\@kaggle}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://kaggle.com/\@kaggle}{\faAlt{Kaggle: \@kaggle}{\faKaggle}{\@kaggle}}%
-        }%
-      \ifthenelse{\isundefined{\@hackerrank}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://www.hackerrank.com/\@hackerrank}{\faAlt{HackerRank: \@hackerrank}{\faHackerrank}{\@hackerrank}}%
-        }%
-      \ifthenelse{\isundefined{\@telegram}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://t.me/\@telegram}{\faAlt{Telegram: \@telegram}{\faTelegram}{\@telegram}}%
-        }%
-      \ifthenelse{\isundefined{\@googlescholarid}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://scholar.google.com/citations?user=\@googlescholarid}{\faAlt{Google Scholar: \@googlescholarid}{\faGraduationCap}{\@googlescholarname}}%
-        }%
-      \ifthenelse{\isundefined{\@extrainfo}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \@extrainfo%
-        }%
-    } \\[\acvHeaderAfterSocialSkip]%
-    \ifthenelse{\isundefined{\@quote}}%
-      {}%
-      {\headerquotestyle{\@quote\\}\vspace{\acvHeaderAfterQuoteSkip}}%
-  \end{minipage}%
-  \begin{minipage}[c]{\headerphotowidth}%
-    \ifthenelse{\equal{\@photoalign}{right}}{\raggedleft\drawphoto}{}
-  \end{minipage}
+  \vspace{5mm}% Slightly more breathing room after header before first section
 }
 
-% Define a footer for CV
-% Usage: \makecvfooter{<left>}{<center>}{<right>}
 \newcommand*{\makecvfooter}[3]{%
   \fancyfoot{}
-  \fancyfoot[L]{\footerstyle{#1}}
-  \fancyfoot[C]{\footerstyle{#2}}
-  \fancyfoot[R]{\footerstyle{#3}}
+  \fancyfoot[L]{\ifnum\value{page}>1\footerstyle{#1}\fi}
+  \ifthenelse{\isempty{#3}}{%
+    \fancyfoot[R]{\ifnum\value{page}>1\footerstyle{#2}\fi}%
+  }{%
+    \fancyfoot[R]{\ifnum\value{page}>1\footerstyle{#2~~~·~~~#3}\fi}%
+  }
+  \fancypagestyle{firstpage}{%
+    \fancyfoot{}
+    \renewcommand{\footrulewidth}{0pt}
+  }
+  \thispagestyle{firstpage}
 }
 
-% Define a section for CV
-% Usage: \cvsection{<section-title>}
+% Section title
 \newcommand{\cvsection}[1]{%
   \vspace{\acvSectionTopSkip}
   \sectionstyle{#1}
   \phantomsection
-  \color{sectiondivider}\vhrulefill{0.9pt}
 }
 
-% Define a subsection for CV
-% Usage: \cvsubsection{<subsection-title>}
 \newcommand{\cvsubsection}[1]{%
   \vspace{\acvSectionContentTopSkip}
-  \vspace{-3mm}
+  \vspace{-2mm}
   \subsectionstyle{#1}
   \phantomsection
 }
 
-% Define a paragraph for CV
+% Summary paragraph
 \newenvironment{cvparagraph}{%
   \vspace{\acvSectionContentTopSkip}
-  \vspace{-3mm}
   \paragraphstyle
 }{%
   \par
-  \vspace{2mm}
+  \vspace{1.5mm}
 }
 
-% Define an environment for cventry
+% Entries container
 \newenvironment{cventries}{%
   \vspace{\acvSectionContentTopSkip}
   \begin{center}
 }{%
   \end{center}
 }
-% Define an entry of cv information
-% Usage: \cventry{<position>}{<title>}{<location>}{<date>}{<description>}
+
+% Single entry
+% Spacing rationale:
+%   - 2mm above each entry keeps entries grouped within a section
+%     but visually separated from each other
+%   - 2mm gap [2.5mm] after the title/meta rows before bullets
+%     gives the eye a moment to parse the header before reading detail
 \newcommand*{\cventry}[5]{%
-  \vspace{-2.0mm}
+  \vspace{2mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
     \ifempty{#2#3}
-      {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-      {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
-      \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-    \ifstrempty{#5}
-      {}
-      {\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}} \\}
+      {\entrytitlestyle{#1 \textemdash\ \entrydatestyle{#4}} \\[-3mm]}
+      {\entrytitlestyle{#1} & \entrylocationstyle{#3} \\
+      \entrypositionstyle{#2 \textemdash\ \entrydatestyle{#4}} \\[-3mm]}
+    \ifstrempty{#5}{}{\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}} \\}
   \end{tabular*}%
 }
 
-% Define an environment for cvsubentry
-\newenvironment{cvsubentries}{%
-  \begin{center}
-}{%
-  \end{center}
-}
-% Define a subentry of cv information
-% Usage: \cvsubentry{<position>}{<title>}{<date>}{<description>}
+\newenvironment{cvsubentries}{\begin{center}}{\end{center}}
+
 \newcommand*{\cvsubentry}[4]{%
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
     \setlength\leftskip{0.2cm}
-    \subentrytitlestyle{#2} & \ifthenelse{\equal{#1}{}}
-      {\subentrydatestyle{#3}}{}
-    \ifthenelse{\equal{#1}{}}
-      {}
-      {\subentrypositionstyle{#1} & \subentrydatestyle{#3} \\}
-    \ifthenelse{\equal{#4}{}}
-      {}
-      {\multicolumn{2}{L{17.0cm}}{\subdescriptionstyle{#4}} \\}
+    \subentrytitlestyle{#2} & \ifthenelse{\equal{#1}{}}{\subentrydatestyle{#3}}{}
+    \ifthenelse{\equal{#1}{}}{}{\subentrypositionstyle{#1} & \subentrydatestyle{#3} \\}
+    \ifthenelse{\equal{#4}{}}{}{\multicolumn{2}{L{17.0cm}}{\subdescriptionstyle{#4}} \\}
   \end{tabular*}
 }
 
-% Define an environment for cvhonor
 \newenvironment{cvhonors}{%
   \vspace{\acvSectionContentTopSkip}
   \vspace{-2mm}
@@ -792,54 +476,108 @@
     \end{tabular*}
   \end{center}
 }
-% Define a line of cv information(honor, award or something else)
-% Usage: \cvhonor{<position>}{<title>}{<location>}{<date>}
+
 \newcommand*{\cvhonor}[4]{%
   \honordatestyle{#4} & \honorpositionstyle{#1}\ifempty{#2}{}{,} \honortitlestyle{#2} & \honorlocationstyle{#3} \\
 }
 
-% Define an environment for cvskill
+% Skills environment — paragraph list, no category headings, gap between groups.
+% Top vspace intentionally omitted here — callers (cvquadrants) control their own spacing.
 \newenvironment{cvskills}{%
-  \vspace{\acvSectionContentTopSkip}
-  \vspace{-2.0mm}
-    \setlength\tabcolsep{1ex}
-    \setlength{\extrarowheight}{0pt}
-    \tabularx{\textwidth}{r>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}X}
+  \raggedright
 }{%
-\endtabularx\par
+  \par
 }
 
-% Define a line of cv information(skill)
-% Usage: \cvskill{<type>}{<skillset>}
 \newcommand*{\cvskill}[2]{%
-  \skilltypestyle{#1} & \leavevmode\skillsetstyle{#2} \\
+  % Arg #1 (category label) is intentionally ignored — no headings.
+  % Arg #2 is a plain prose string; rendered as a paragraph in skillsetstyle.
+  {\skillsetstyle{#2}}\par
+  \vspace{3mm}% visual gap between the three skill groups
 }
 
-% Define an environment for cvitems(for cventry)
+% Bullet list for entries
+% -2mm top pulls the list flush against the entry header gap we already set (2mm via \\[2mm]).
+% 2pt itemsep keeps bullets tight but distinct.
+% 1.5mm bottom gives a small breath before the next entry's 2mm top.
 \newenvironment{cvitems}{%
-  \vspace{-4.0mm}
+  \vspace{0mm}
   \begin{justify}
-  \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
+  \begin{itemize}[leftmargin=1.5ex, nosep, noitemsep, topsep=0pt]
     \setlength{\parskip}{0pt}
+    \setlength{\itemsep}{2pt}
     \renewcommand{\labelitemi}{\bullet}
 }{%
   \end{itemize}
   \end{justify}
-  \vspace{1.0mm}
+  \vspace{0mm}
 }
 
+%-------------------------------------------------------------------------------
+%  Four-quadrant bottom section
+%  Layout: 2×2 grid — Skills (TL), Education (TR), More About Me (BL), Graph (BR)
+%  All four cells are equal width (0.47\textwidth each) with a fixed column gap.
+%  Vertical rhythm: top row and bottom row separated by \cvquadrantRowGap.
+%
+%  Usage in .tex:
+%    \cvquadrants
+%      {skills content}        % top-left:  \cvskill blocks
+%      {education content}     % top-right: \cventries block
+%      {more about me text}    % bottom-left: paragraph
+%      {path/to/graph.png}     % bottom-right: image path
+%
+%  The section titles (Skills, Education) are typeset inside the cells using
+%  the normal \cvsection style so they match the rest of the document.
+%-------------------------------------------------------------------------------
+\newlength{\cvquadrantColWidth}
+\newlength{\cvquadrantGap}
+\setlength{\cvquadrantGap}{5mm}
+% Header photo layout lengths (declared here, set in \makecvheader)
+\newlength{\cvphotowidth}
+\newlength{\cvlinkswidth}
+\newlength{\cvnamewidth}
 
-%-------------------------------------------------------------------------------
-%                Commands for elements of Cover Letter
-%-------------------------------------------------------------------------------
-% Define an environment for cvletter
-\newenvironment{cvletter}{%
-  \lettertextstyle
-}{%
+\newcommand{\cvquadrants}[4]{%
+  \setlength{\cvquadrantColWidth}{0.5\textwidth}%
+  \addtolength{\cvquadrantColWidth}{-0.5\cvquadrantGap}%
+  \vspace{\acvSectionTopSkip}%
+  \noindent
+  % ── TOP ROW: Skills (left) | Education (right) ───────────────────────────
+  \begin{minipage}[t]{\cvquadrantColWidth}
+    \raggedright
+    \sectionstyle{Skills}\par
+    \vspace{1.5mm}
+    #1%
+  \end{minipage}%
+  \hspace{\cvquadrantGap}%
+  \begin{minipage}[t]{\cvquadrantColWidth}
+    \raggedright
+    \sectionstyle{Education}\par
+    \vspace{1.5mm}
+    #2%
+  \end{minipage}%
+  \par\vspace{7mm}%
+  % ── BOTTOM ROW: More about me (left) | Graph (right) ─────────────────────
+  \noindent
+  \begin{minipage}[t]{\cvquadrantColWidth}
+    \raggedright
+    \sectionstyle{More about me}\par
+    \vspace{2mm}
+    {\paragraphstyle #3\par}%
+  \end{minipage}%
+  \hspace{\cvquadrantGap}%
+  \begin{minipage}[t]{\cvquadrantColWidth}
+    \centering\vspace{0pt}%
+    \includegraphics[width=\linewidth,keepaspectratio]{#4}%
+  \end{minipage}%
+  \vspace{3mm}%
 }
 
-% Define a section for the cover letter
-% Usage: \lettersection{<section-title>}
+%-------------------------------------------------------------------------------
+%                Cover Letter
+%-------------------------------------------------------------------------------
+\newenvironment{cvletter}{\lettertextstyle}{}
+
 \newcommand{\lettersection}[1]{%
   \par\addvspace{2.5ex}
   \phantomsection{}
@@ -849,8 +587,6 @@
   \lettertextstyle
 }
 
-% Define a title of the cover letter
-% Usage: \makelettertitle
 \newcommand*{\makelettertitle}{%
   \vspace{8.4mm}
   \setlength\tabcolsep{0pt}
@@ -861,22 +597,16 @@
   \begin{singlespace}
     \recipientaddressstyle{\@recipientaddress} \\\\
   \end{singlespace}
-  \ifthenelse{\isundefined{\@lettertitle}}
-    {}
-    {\lettertitlestyle{\@lettertitle} \\}
+  \ifthenelse{\isundefined{\@lettertitle}}{}{\lettertitlestyle{\@lettertitle} \\}
   \lettertextstyle{\@letteropening}
 }
 
-% Define a closing of the cover letter
-% Usage: \makeletterclosing
 \newcommand*{\makeletterclosing}{%
   \vspace{3.4mm}
   \lettertextstyle{\@letterclosing} \\\\
   \letternamestyle{\@firstname\ \@lastname}
-  \ifthenelse{\isundefined{\@letterenclosure}}
-    {\\}
-    {%
-      \\\\\\
-      \letterenclosurestyle{\@letterenclname: \@letterenclosure} \\
-    }
+  \ifthenelse{\isundefined{\@letterenclosure}}{\\}{%
+    \\\\\\
+    \letterenclosurestyle{\@letterenclname: \@letterenclosure} \\
+  }
 }

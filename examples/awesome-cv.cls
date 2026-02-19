@@ -132,9 +132,8 @@
 % Footer — same family/weight as body, no small-caps
 \newcommand*{\footerstyle}[1]{{\fontsize{7.5pt}{1.3em}\bodyfont\upshape\color{lighttext} #1}}
 
-% Section titles — 13pt light, ~1px letterspacing
-% LetterSpace=8 in fontspec units ≈ 0.08em ≈ ~1px at 13pt
-\newcommand*{\sectionstyleface}[1]{{\fontsize{13pt}{1.3em}\bodyfont\ibmplexlight\addfontfeatures{LetterSpace=8} #1}}
+% Section titles — 14pt semibold (bfseries), same font family as document
+\newcommand*{\sectionstyleface}[1]{{\fontsize{14pt}{1.3em}\bodyfont\bfseries\color{text} #1}}
 \newcommand*{\sectionstyle}[1]{%
   \def\@acvSectionTmp{#1}
   \ifthenelse{\boolean{acvSectionColorHighlight}}{%
@@ -304,6 +303,7 @@
 \newcommand{\acvHeaderNameDelim}{\space}
 \newcommand{\acvHeaderAfterNameSkip}{0.4mm}
 \newcommand{\acvHeaderAfterPositionSkip}{0.4mm}
+\newcommand{\acvHeaderAfterLastNameSkip}{2mm}
 \newcommand{\acvHeaderAfterAddressSkip}{0mm}
 \newcommand{\acvHeaderIconSep}{}
 \newcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
@@ -331,6 +331,18 @@
 %-------------------------------------------------------------------------------
 %                CV Structure Commands
 %-------------------------------------------------------------------------------
+% Header layout: explicit lengths for photo, name, and links columns
+% All three columns fill the full text width exactly with only controlled 3mm gutters
+\newlength{\cvphotowidth}
+\newlength{\cvlinkswidth}
+\newlength{\cvnamewidth}
+\setlength{\cvphotowidth}{2.4cm}
+\setlength{\cvlinkswidth}{0.28\textwidth}
+\setlength{\cvnamewidth}{\textwidth}
+\addtolength{\cvnamewidth}{-\cvphotowidth}
+\addtolength{\cvnamewidth}{-\cvlinkswidth}
+\addtolength{\cvnamewidth}{-6mm}% Subtract 2×3mm gaps
+
 \newcommand*{\makecvheader}[1][C]{%
   \noindent
   \ifthenelse{\isundefined{\@photo}}{%
@@ -350,22 +362,22 @@
       }%
     \end{minipage}%
   }{%
-    \begin{minipage}[t]{0.18\textwidth}
+    \begin{minipage}[t]{\cvphotowidth}
       \vspace{0pt}
       \includegraphics[width=2cm,height=2cm,keepaspectratio]{\@photo}
     \end{minipage}%
-    \hspace{8mm}%
-    \begin{minipage}[t]{0.45\textwidth}
+    \hspace{3mm}%
+    \begin{minipage}[t]{\cvnamewidth}
       \vspace{0pt}
       \raggedright
       \headerfirstnamestyle{\@firstname}%
       \\[\acvHeaderAfterNameSkip]%
       \headerlastnamestyle{\@lastname}%
-      \\[\acvHeaderAfterNameSkip]%
+      \\[\acvHeaderAfterLastNameSkip]%
       \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position}}%
     \end{minipage}%
-    \hfill
-    \begin{minipage}[t]{0.30\textwidth}
+    \hspace{3mm}%
+    \begin{minipage}[t]{\cvlinkswidth}
       \vspace{0pt}
       \raggedleft
       \headersocialstyle{%
@@ -426,12 +438,12 @@
 
 % Single entry
 % Spacing rationale:
-%   - 2mm above each entry keeps entries grouped within a section
+%   - 4mm above each entry keeps entries grouped within a section
 %     but visually separated from each other
 %   - 2mm gap [2.5mm] after the title/meta rows before bullets
 %     gives the eye a moment to parse the header before reading detail
 \newcommand*{\cventry}[5]{%
-  \vspace{2mm}
+  \vspace{4mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
@@ -484,15 +496,17 @@
   % Arg #1 (category label) is intentionally ignored — no headings.
   % Arg #2 is a plain prose string; rendered as a paragraph in skillsetstyle.
   {\skillsetstyle{#2}}\par
-  \vspace{3mm}% visual gap between the three skill groups
+  \vspace{5mm}% visual gap between the three skill groups
 }
 
 % Bullet list for entries
 % -2mm top pulls the list flush against the entry header gap we already set (2mm via \\[2mm]).
 % 2pt itemsep keeps bullets tight but distinct.
 % 1.5mm bottom gives a small breath before the next entry's 2mm top.
+% Uses descriptionstyle font size (9pt) to match EXPERIENCE bullets
 \newenvironment{cvitems}{%
   \vspace{0mm}
+  \fontsize{9pt}{1.55em}\selectfont
   \begin{justify}
   \begin{itemize}[leftmargin=1.5ex, nosep, noitemsep, topsep=0pt]
     \setlength{\parskip}{0pt}
@@ -532,27 +546,24 @@
   % ── TOP ROW: Skills (left) | Education (right) ───────────────────────────
   \begin{minipage}[t]{\cvquadrantColWidth}
     \raggedright
-    {\fontsize{13pt}{1.3em}\bodyfont\ibmplexlight%
-      \color{awesome}Ski\color{text}lls}\par
-    \vspace{1.5mm}
+    \sectionstyle{Skills}\par
+    \vspace{5mm}
     #1%
   \end{minipage}%
   \hspace{\cvquadrantGap}%
   \begin{minipage}[t]{\cvquadrantColWidth}
     \raggedright
-    {\fontsize{13pt}{1.3em}\bodyfont\ibmplexlight%
-      \color{awesome}Edu\color{text}cation}\par
-    \vspace{1.5mm}
+    \sectionstyle{Education}\par
+    \vspace{5mm}
     #2%
   \end{minipage}%
-  \par\vspace{7mm}%
+  \par\vspace{10mm}%
   % ── BOTTOM ROW: More about me (left) | Graph (right) ─────────────────────
   \noindent
   \begin{minipage}[t]{\cvquadrantColWidth}
     \raggedright
-    {\fontsize{13pt}{1.3em}\bodyfont\ibmplexlight%
-      \color{awesome}Mor\color{text}e about me}\par
-    \vspace{2mm}
+    \sectionstyle{More about me}\par
+    \vspace{5mm}
     {\paragraphstyle #3\par}%
   \end{minipage}%
   \hspace{\cvquadrantGap}%
@@ -560,7 +571,7 @@
     \centering\vspace{0pt}%
     \includegraphics[width=\linewidth,keepaspectratio]{#4}%
   \end{minipage}%
-  \vspace{3mm}%
+  \vspace{5mm}%
 }
 
 %-------------------------------------------------------------------------------
