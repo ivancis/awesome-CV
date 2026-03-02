@@ -1,42 +1,64 @@
 %-------------------------------------------------------------------------------
-%	FOUR-QUADRANT SECTION
+%	QUADRANT SECTION
 %	Skills (TL) | Education (TR)
-%	More about me (BL) | Graph (BR)
+%	More about me (full width)
+%	Graph (full width)
 %-------------------------------------------------------------------------------
-\cvquadrants
-  {% ── TOP-LEFT: Skills ───────────────────────────────────────────────────────
-    \begin{cvitems}
-      \item {Iterative, user-centered, attention to detail}
-      \item {Proactive in identifying needs and opportunities}
-      \item {Team and community oriented, time management capacity}
-      \item {Design engineering, systems thinking}
-      \item {Figma, Whiteboards, CSS, JavaScript, SVG, Git}
-      \item {Test-driven continuous iteration}
-      \item {Fluent in Spanish and English. Very little German}
-    \end{cvitems}
-  }
-  {% ── TOP-RIGHT: Education ───────────────────────────────────────────────────
-    \begin{cventries}
-      \cventry
-        {BA Graphic Design}
-        {UAI}
-        {}
-        {May 2010 - Feb. 2014}
-        {
-          \begin{cvitems}
-            \item {Visual Communication, Sciences of Communication.}
-            \item {Teaching Assistant: Visual Communication I, II, III.}
-          \end{cvitems}
-        }
-    \end{cventries}
-  }
-  {% ── BOTTOM-LEFT: More about me ─────────────────────────────────────────────
-    I've spent the last 8 years living and working across Europe, building
-    design systems that actually get used. I'm at my best when I own the whole
-    thing: Figma architecture, pattern logic, stakeholder buy-in, adoption
-    metrics. I like the craft and I like the strategy. Multi-platform work is
-    where I've spent most of my time: web, iOS, Android, all three at once.
-    I spot what needs fixing and I fix it. I don't wait to be asked.
-  }
-  {placeholder.png}% ── BOTTOM-RIGHT: replace with your actual graph image path ─────
+% Top row: Skills and Education side by side
+\vspace{\acvSectionTopSkip}
+\noindent
+\setlength{\cvquadrantColWidth}{0.5\textwidth}%
+\addtolength{\cvquadrantColWidth}{-0.5\cvquadrantGap}%
+
+% ── TOP ROW: Skills (left) | Education (right) ───────────────────────────
+\begin{minipage}[t]{\cvquadrantColWidth}
+  \raggedright
+  \sectionstyle{Skills}\par
+  \vspace{5mm}
+  \begin{cvitems}
+    \item User-centered design and strategy
+    \item Test driven, iterative mindset. Cross-functional facilitation
+    \item Figma, Framer, whiteboards, CSS, SVGs, AI-Editors, Git
+    \item White-label UI architecture and design systems
+    \item Fluent: Spanish, English
+  \end{cvitems}
+\end{minipage}%
+\hspace{\cvquadrantGap}%
+\begin{minipage}[t]{\cvquadrantColWidth}
+  \raggedright
+  \sectionstyle{Education}\par
+  \vspace{5mm}
+  \begin{cventries}
+    \cventry
+      {BA Graphic Design}
+      {UAI}
+      {}
+      {May 2010 - Feb. 2014}
+      {
+        \begin{cvitems}
+          \item {Visual Communication, Sciences of Communication.}
+          \item {Teaching Assistant: Visual Communication I, II, III.}
+        \end{cvitems}
+      }
+  \end{cventries}
+\end{minipage}%
+
+% ── BOTTOM: More about me (full width) ─────────────────────────────────────
+\par\vspace{7mm}%
+\noindent
+\begin{minipage}[t]{\textwidth}
+  \raggedright
+  \sectionstyle{More about me}\par
+  \vspace{3mm}
+  {\paragraphstyle I like building design systems targeted for adoption. I've spent
+  the last 8 years doing this in Spain and Austria, working with teams on multi-platform products. I tend to spot what needs fixing and I fix it.\par}%
+\end{minipage}%
+
+% % ── BOTTOM: Graph (full width) ───────────────────────────────────────────
+% \par\vspace{5mm}%
+% \noindent
+% \begin{minipage}[t]{\textwidth}
+%   \centering\vspace{0pt}%
+%   \includegraphics[width=\linewidth,height=0.545\textheight,keepaspectratio]{placeholder.png}%
+% \end{minipage}%
 

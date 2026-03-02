@@ -279,9 +279,9 @@
 %
 %  Macro                      Value   Purpose
 %  ─────────────────────────────────────────────────────────────────────────
-%  acvSectionTopSkip          5mm     Space ABOVE a section title.
+%  acvSectionTopSkip          2mm     Space ABOVE a section title.
 %                                     Separates sections clearly.
-%  acvSectionContentTopSkip   2.5mm   Space BELOW section title, ABOVE
+%  acvSectionContentTopSkip   1mm   Space BELOW section title, ABOVE
 %                                     first entry. Keeps title and content
 %                                     visually grouped.
 %  cventry internal vspace    2mm     Gap ABOVE each entry block (between
@@ -310,7 +310,7 @@
 \newcommand{\acvHeaderAfterSocialSkip}{2mm}
 \newcommand{\acvHeaderAfterQuoteSkip}{3mm}
 
-\newcommand{\acvSectionTopSkip}{5mm}
+\newcommand{\acvSectionTopSkip}{2mm}
 \newcommand{\acvSectionContentTopSkip}{1mm}
 
 %-------------------------------------------------------------------------------
@@ -346,7 +346,7 @@
       \headersocialstyle{%
         \ifthenelse{\isundefined{\@email}}{}{\href{mailto:\@email}{\underline{\@email}}}%
         \ifthenelse{\isundefined{\@homepage}}{}{\\[3.5pt]\href{https://\@homepage}{\underline{\@homepage}}}%
-        \ifthenelse{\isundefined{\@linkedin}}{}{\\[3.5pt]\href{https://www.linkedin.com/in/\@linkedin}{\underline{linkedin.com/in/\@linkedin}}}%
+        \ifthenelse{\isundefined{\@linkedin}}{}{\\[3.5pt]\href{https://www.linkedin.com/in/\@linkedin}{\underline{https://www.linkedin.com/in/\@linkedin}}}%
       }%
     \end{minipage}%
   }{%
@@ -380,7 +380,7 @@
       \headersocialstyle{%
         \ifthenelse{\isundefined{\@email}}{}{\href{mailto:\@email}{\underline{\@email}}}%
         \ifthenelse{\isundefined{\@homepage}}{}{\\[3.5pt]\href{https://\@homepage}{\underline{\@homepage}}}%
-        \ifthenelse{\isundefined{\@linkedin}}{}{\\[3.5pt]\href{https://www.linkedin.com/in/\@linkedin}{\underline{linkedin.com/in/\@linkedin}}}%
+        \ifthenelse{\isundefined{\@linkedin}}{}{\\[3.5pt]\href{https://www.linkedin.com/in/\@linkedin}{\underline{https://linkedin.com/in/\@linkedin}}}%
       }%
     \end{minipage}%
   }%

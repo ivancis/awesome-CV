@@ -176,13 +176,13 @@
 \newcommand*{\skilltypestyle}[1]{{\fontsize{9pt}{1.45em}\bodyfont\upshape\color{darktext} #1}}
 \newcommand*{\skillsetstyle}[1]{{\fontsize{9pt}{1.45em}\bodyfont\color{text} #1}}
 
-% Cover letter
-\newcommand*{\lettersectionstyleface}[1]{{\fontsize{12pt}{1.25em}\bodyfont\bfseries #1}}
+% Cover letter - matching resume section styling
+\newcommand*{\lettersectionstyleface}[1]{{\fontsize{14pt}{1.3em}\bodyfont\bfseries\color{text} #1}}
 \newcommand*{\lettersectionstyle}[1]{%
   \def\@acvLetterSectionTmp{#1}
   \ifthenelse{\boolean{acvSectionColorHighlight}}{%
     \StrSplit{\@acvLetterSectionTmp}{3}{\acvLetterSectionStringAwesome}{\acvLetterSectionStringPlain}%
-      \color{awesome}\sectionstyleface{\acvLetterSectionStringAwesome%
+      \color{awesome}\lettersectionstyleface{\acvLetterSectionStringAwesome%
       \color{text}{\acvLetterSectionStringPlain}}}%
       {\color{text}\lettersectionstyleface{\@acvLetterSectionTmp}}}
 \newcommand*{\recipientaddressstyle}[1]{{\fontsize{9pt}{1.4em}\bodyfont\scshape\color{graytext} #1}}
@@ -278,9 +278,9 @@
 %
 %  Macro                      Value   Purpose
 %  ─────────────────────────────────────────────────────────────────────────
-%  acvSectionTopSkip          5mm     Space ABOVE a section title.
+%  acvSectionTopSkip          2mm     Space ABOVE a section title.
 %                                     Separates sections clearly.
-%  acvSectionContentTopSkip   2.5mm   Space BELOW section title, ABOVE
+%  acvSectionContentTopSkip   1mm   Space BELOW section title, ABOVE
 %                                     first entry. Keeps title and content
 %                                     visually grouped.
 %  cventry internal vspace    2mm     Gap ABOVE each entry block (between
@@ -310,7 +310,7 @@
 \newcommand{\acvHeaderAfterSocialSkip}{2mm}
 \newcommand{\acvHeaderAfterQuoteSkip}{3mm}
 
-\newcommand{\acvSectionTopSkip}{5mm}
+\newcommand{\acvSectionTopSkip}{2mm}
 \newcommand{\acvSectionContentTopSkip}{1mm}
 
 %-------------------------------------------------------------------------------
@@ -358,7 +358,7 @@
       \headersocialstyle{%
         \ifthenelse{\isundefined{\@email}}{}{\href{mailto:\@email}{\underline{\@email}}}%
         \ifthenelse{\isundefined{\@homepage}}{}{\\[3.5pt]\href{https://\@homepage}{\underline{\@homepage}}}%
-        \ifthenelse{\isundefined{\@linkedin}}{}{\\[3.5pt]\href{https://www.linkedin.com/in/\@linkedin}{\underline{linkedin.com/in/\@linkedin}}}%
+        \ifthenelse{\isundefined{\@linkedin}}{}{\\[3.5pt]\href{https://www.linkedin.com/in/\@linkedin}{\underline{https://www.linkedin.com/in/\@linkedin}}}%
       }%
     \end{minipage}%
   }{%
@@ -383,7 +383,7 @@
       \headersocialstyle{%
         \ifthenelse{\isundefined{\@email}}{}{\href{mailto:\@email}{\underline{\@email}}}%
         \ifthenelse{\isundefined{\@homepage}}{}{\\[3.5pt]\href{https://\@homepage}{\underline{\@homepage}}}%
-        \ifthenelse{\isundefined{\@linkedin}}{}{\\[3.5pt]\href{https://www.linkedin.com/in/\@linkedin}{\underline{linkedin.com/in/\@linkedin}}}%
+        \ifthenelse{\isundefined{\@linkedin}}{}{\\[3.5pt]\href{https://www.linkedin.com/in/\@linkedin}{\underline{https://linkedin.com/in/\@linkedin}}}%
       }%
     \end{minipage}%
   }%
@@ -580,11 +580,10 @@
 \newenvironment{cvletter}{\lettertextstyle}{}
 
 \newcommand{\lettersection}[1]{%
-  \par\addvspace{2.5ex}
-  \phantomsection{}
+  \vspace{\acvSectionTopSkip}
   \lettersectionstyle{#1}
-  \color{sectiondivider}\vhrulefill{0.9pt}
-  \par\nobreak\addvspace{0.4ex}
+  \phantomsection
+  \vspace{\acvSectionContentTopSkip}
   \lettertextstyle
 }
 
