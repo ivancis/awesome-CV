@@ -110,7 +110,7 @@
 %                Typography scale
 %
 %  Design rationale (UX portfolio context):
-%  - Name: 26pt bold — commanding but not excessive on A4
+%  - Name: 24pt bold — commanding but not excessive on A4
 %  - Section titles: 13pt light — clear hierarchy without shouting
 %  - Entry title: 11pt regular — one clear step below section
 %  - Meta (company, date, location): 8.5pt muted — recedes appropriately
@@ -121,8 +121,8 @@
 %-------------------------------------------------------------------------------
 
 % Header
-\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{26pt}{1.2em}\headerfont\bfseries\color{darktext} #1}}
-\newcommand*{\headerlastnamestyle}[1]{{\fontsize{26pt}{1.2em}\headerfont\bfseries\color{darktext} #1}}
+\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{24pt}{1.2em}\headerfont\bfseries\color{darktext} #1}}
+\newcommand*{\headerlastnamestyle}[1]{{\fontsize{24pt}{1.2em}\headerfont\bfseries\color{darktext} #1}}
 \newcommand*{\headerpositionstyle}[1]{{\fontsize{9pt}{1.45em}\bodyfont\color{graytext} #1}}
 \newcommand*{\headeraddressstyle}[1]{{\fontsize{8.5pt}{1.4em}\headerfont\itshape\color{lighttext} #1}}
 % Header social links — 8.5pt, graytext, tight leading (line gaps set explicitly via \\[Xmm] in makecvheader)
@@ -284,7 +284,7 @@
 %  acvSectionContentTopSkip   1mm   Space BELOW section title, ABOVE
 %                                     first entry. Keeps title and content
 %                                     visually grouped.
-%  cventry internal vspace    2mm     Gap ABOVE each entry block (between
+%  cventry internal vspace    0mm     Gap ABOVE each entry block (between
 %                                     entries). Tighter than section gap
 %                                     — entries belong to the same section.
 %  cventry post-title gap     2mm     Space after the title/meta row,
@@ -440,7 +440,7 @@
 %   - 2mm gap [2.5mm] after the title/meta rows before bullets
 %     gives the eye a moment to parse the header before reading detail
 \newcommand*{\cventry}[5]{%
-  \vspace{2mm}
+  \vspace{0mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}

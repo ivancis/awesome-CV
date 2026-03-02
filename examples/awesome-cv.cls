@@ -110,30 +110,30 @@
 %                Typography scale
 %
 %  Design rationale (UX portfolio context):
-%  - Name: 26pt bold — commanding but not excessive on A4
+%  - Name: 24pt bold — commanding but not excessive on A4
 %  - Section titles: 13pt light — clear hierarchy without shouting
 %  - Entry title: 11pt regular — one clear step below section
 %  - Meta (company, date, location): 8.5pt muted — recedes appropriately
-%  - Body/bullets: 9pt, leading 1.55 — comfortable reading density
-%  - Summary: 9pt italic, leading 1.6 — slightly looser for paragraph text
+%  - Body/bullets: 9.5pt, leading 1.55 — comfortable reading density
+%  - Summary: 9.5pt italic, leading 1.6 — slightly looser for paragraph text
 %
 %  Line heights use em so they scale with font size.
 %-------------------------------------------------------------------------------
 
 % Header
-\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{26pt}{1.2em}\headerfont\bfseries\color{darktext} #1}}
-\newcommand*{\headerlastnamestyle}[1]{{\fontsize{26pt}{1.2em}\headerfont\bfseries\color{darktext} #1}}
-\newcommand*{\headerpositionstyle}[1]{{\fontsize{9pt}{1.45em}\bodyfont\color{graytext} #1}}
+\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{24pt}{1.2em}\headerfont\bfseries\color{darktext} #1}}
+\newcommand*{\headerlastnamestyle}[1]{{\fontsize{24pt}{1.2em}\headerfont\bfseries\color{darktext} #1}}
+\newcommand*{\headerpositionstyle}[1]{{\fontsize{9.5pt}{1.45em}\bodyfont\color{graytext} #1}}
 \newcommand*{\headeraddressstyle}[1]{{\fontsize{8.5pt}{1.4em}\headerfont\itshape\color{lighttext} #1}}
 % Header social links — 8.5pt, graytext, tight leading (line gaps set explicitly via \\[Xmm] in makecvheader)
 \newcommand*{\headersocialstyle}[1]{{\fontsize{8.5pt}{8.5pt}\bodyfont\upshape\color{graytext} #1}}
-\newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1.55em}\bodyfont\itshape\color{darktext} #1}}
+\newcommand*{\headerquotestyle}[1]{{\fontsize{9.5pt}{1.55em}\bodyfont\itshape\color{darktext} #1}}
 
 % Footer — same family/weight as body, no small-caps
 \newcommand*{\footerstyle}[1]{{\fontsize{7.5pt}{1.3em}\bodyfont\upshape\color{lighttext} #1}}
 
-% Section titles — 14pt semibold (bfseries), same font family as document
-\newcommand*{\sectionstyleface}[1]{{\fontsize{14pt}{1.3em}\bodyfont\bfseries\color{text} #1}}
+% Section titles — 13pt semibold (bfseries), same font family as document
+\newcommand*{\sectionstyleface}[1]{{\fontsize{13pt}{1.3em}\bodyfont\bfseries\color{text} #1}}
 \newcommand*{\sectionstyle}[1]{%
   \def\@acvSectionTmp{#1}
   \ifthenelse{\boolean{acvSectionColorHighlight}}{%
@@ -145,7 +145,7 @@
 \newcommand*{\subsectionstyle}[1]{{\fontsize{10pt}{1.4em}\bodyfont\scshape\textcolor{text}{#1}}}
 
 % Summary paragraph
-\newcommand*{\paragraphstyle}{\fontsize{9pt}{1.6em}\bodyfont\itshape\color{text}}
+\newcommand*{\paragraphstyle}{\fontsize{9.5pt}{1.6em}\bodyfont\itshape\color{text}}
 
 % Entry elements
 % Job title: 11pt — sits clearly above meta info
@@ -156,8 +156,8 @@
 \newcommand*{\entrydatestyle}[1]{{\fontsize{8.5pt}{1.45em}\bodyfont\color{lighttext} #1}}
 % Location: 8.5pt muted
 \newcommand*{\entrylocationstyle}[1]{{\fontsize{8.5pt}{1.45em}\bodyfont\color{lighttext} #1}}
-% Bullet text: 9pt, leading 1.55 — comfortable density
-\newcommand*{\descriptionstyle}[1]{{\fontsize{9pt}{1.55em}\bodyfont\upshape\color{text} #1}}
+% Bullet text: 9.5pt, leading 1.55 — comfortable density
+\newcommand*{\descriptionstyle}[1]{{\fontsize{9.5pt}{1.55em}\bodyfont\upshape\color{text} #1}}
 
 % Subentry
 \newcommand*{\subentrytitlestyle}[1]{{\fontsize{8.5pt}{1.4em}\bodyfont\mdseries\color{graytext} #1}}
@@ -167,14 +167,14 @@
 \newcommand*{\subdescriptionstyle}[1]{{\fontsize{8.5pt}{1.4em}\bodyfontlight\upshape\color{text} #1}}
 
 % Honor
-\newcommand*{\honortitlestyle}[1]{{\fontsize{9pt}{1.4em}\bodyfont\color{graytext} #1}}
-\newcommand*{\honorpositionstyle}[1]{{\fontsize{9pt}{1.4em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\honordatestyle}[1]{{\fontsize{9pt}{1.4em}\bodyfont\color{graytext} #1}}
-\newcommand*{\honorlocationstyle}[1]{{\fontsize{9pt}{1.4em}\bodyfontlight\slshape\color{awesome} #1}}
+\newcommand*{\honortitlestyle}[1]{{\fontsize{9.5pt}{1.4em}\bodyfont\color{graytext} #1}}
+\newcommand*{\honorpositionstyle}[1]{{\fontsize{9.5pt}{1.4em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\honordatestyle}[1]{{\fontsize{9.5pt}{1.4em}\bodyfont\color{graytext} #1}}
+\newcommand*{\honorlocationstyle}[1]{{\fontsize{9.5pt}{1.4em}\bodyfontlight\slshape\color{awesome} #1}}
 
 % Skills
-\newcommand*{\skilltypestyle}[1]{{\fontsize{9pt}{1.45em}\bodyfont\upshape\color{darktext} #1}}
-\newcommand*{\skillsetstyle}[1]{{\fontsize{9pt}{1.45em}\bodyfont\color{text} #1}}
+\newcommand*{\skilltypestyle}[1]{{\fontsize{9.5pt}{1.45em}\bodyfont\upshape\color{darktext} #1}}
+\newcommand*{\skillsetstyle}[1]{{\fontsize{9.5pt}{1.45em}\bodyfont\color{text} #1}}
 
 % Cover letter - matching resume section styling
 \newcommand*{\lettersectionstyleface}[1]{{\fontsize{14pt}{1.3em}\bodyfont\bfseries\color{text} #1}}
@@ -185,10 +185,10 @@
       \color{awesome}\lettersectionstyleface{\acvLetterSectionStringAwesome%
       \color{text}{\acvLetterSectionStringPlain}}}%
       {\color{text}\lettersectionstyleface{\@acvLetterSectionTmp}}}
-\newcommand*{\recipientaddressstyle}[1]{{\fontsize{9pt}{1.4em}\bodyfont\scshape\color{graytext} #1}}
+\newcommand*{\recipientaddressstyle}[1]{{\fontsize{9.5pt}{1.4em}\bodyfont\scshape\color{graytext} #1}}
 \newcommand*{\recipienttitlestyle}[1]{{\fontsize{10.5pt}{1.4em}\bodyfont\bfseries\color{darktext} #1}}
 \newcommand*{\lettertitlestyle}[1]{{\fontsize{10pt}{1.4em}\bodyfontlight\bfseries\color{darktext} \underline{#1}}}
-\newcommand*{\letterdatestyle}[1]{{\fontsize{9pt}{1.4em}\bodyfontlight\slshape\color{graytext} #1}}
+\newcommand*{\letterdatestyle}[1]{{\fontsize{9.5pt}{1.4em}\bodyfontlight\slshape\color{graytext} #1}}
 \newcommand*{\lettertextstyle}{\fontsize{10pt}{1.55em}\bodyfontlight\upshape\color{graytext}}
 \newcommand*{\letternamestyle}[1]{{\fontsize{10pt}{1.4em}\bodyfont\bfseries\color{darktext} #1}}
 \newcommand*{\letterenclosurestyle}[1]{{\fontsize{10pt}{1.4em}\bodyfontlight\slshape\color{lighttext} #1}}
@@ -283,7 +283,7 @@
 %  acvSectionContentTopSkip   1mm   Space BELOW section title, ABOVE
 %                                     first entry. Keeps title and content
 %                                     visually grouped.
-%  cventry internal vspace    2mm     Gap ABOVE each entry block (between
+%  cventry internal vspace    0mm     Gap ABOVE each entry block (between
 %                                     entries). Tighter than section gap
 %                                     — entries belong to the same section.
 %  cventry post-title gap     2mm     Space after the title/meta row,
@@ -311,7 +311,7 @@
 \newcommand{\acvHeaderAfterQuoteSkip}{3mm}
 
 \newcommand{\acvSectionTopSkip}{0mm}
-\newcommand{\acvSectionContentTopSkip}{1mm}
+\newcommand{\acvSectionContentTopSkip}{0mm}
 
 %-------------------------------------------------------------------------------
 %                Utilities
@@ -407,7 +407,6 @@
 
 % Section title
 \newcommand{\cvsection}[1]{%
-  \vspace{\acvSectionTopSkip}
   \sectionstyle{#1}
   \phantomsection
 }
@@ -430,7 +429,6 @@
 
 % Entries container
 \newenvironment{cventries}{%
-  \vspace{\acvSectionContentTopSkip}
   \begin{center}
 }{%
   \end{center}
@@ -443,7 +441,7 @@
 %   - 2mm gap [2.5mm] after the title/meta rows before bullets
 %     gives the eye a moment to parse the header before reading detail
 \newcommand*{\cventry}[5]{%
-  \vspace{4mm}
+  \vspace{0mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
@@ -503,10 +501,10 @@
 % -2mm top pulls the list flush against the entry header gap we already set (2mm via \\[2mm]).
 % 2pt itemsep keeps bullets tight but distinct.
 % 1.5mm bottom gives a small breath before the next entry's 2mm top.
-% Uses descriptionstyle font size (9pt) to match EXPERIENCE bullets
+% Uses descriptionstyle font size (9.5pt) to match EXPERIENCE bullets
 \newenvironment{cvitems}{%
   \vspace{0mm}
-  \fontsize{9pt}{1.55em}\selectfont
+  \fontsize{9.5pt}{1.55em}\selectfont
   \begin{justify}
   \begin{itemize}[leftmargin=1.5ex, nosep, noitemsep, topsep=0pt]
     \setlength{\parskip}{0pt}
