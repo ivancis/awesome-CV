@@ -279,7 +279,7 @@
 %
 %  Macro                      Value   Purpose
 %  ─────────────────────────────────────────────────────────────────────────
-%  acvSectionTopSkip          2mm     Space ABOVE a section title.
+%  acvSectionTopSkip          0mm     Space ABOVE a section title.
 %                                     Separates sections clearly.
 %  acvSectionContentTopSkip   1mm   Space BELOW section title, ABOVE
 %                                     first entry. Keeps title and content
@@ -310,7 +310,7 @@
 \newcommand{\acvHeaderAfterSocialSkip}{2mm}
 \newcommand{\acvHeaderAfterQuoteSkip}{3mm}
 
-\newcommand{\acvSectionTopSkip}{2mm}
+\newcommand{\acvSectionTopSkip}{0mm}
 \newcommand{\acvSectionContentTopSkip}{1mm}
 
 %-------------------------------------------------------------------------------
